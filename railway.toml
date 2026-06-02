@@ -1,2 +1,5 @@
 [build]
-builder = "docker"
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "python app.py"
