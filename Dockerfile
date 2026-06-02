@@ -9,7 +9,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PIP_ROOT_USER_ACTION=ignore \
     TZ=UTC
 
-RUN --mount=type=cache,id=apt-cache,target=/var/cache/apt,sharing=locked \
+RUN --mount=type=cache,id=cache-apt,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt-get update && apt-get install -y --no-install-recommends \
     gcc libhdf5-dev libnetcdf-dev && \
@@ -17,7 +17,7 @@ RUN --mount=type=cache,id=apt-cache,target=/var/cache/apt,sharing=locked \
 
 COPY requirements.txt .
 
-RUN --mount=type=cache,id=pip-cache,target=/root/.cache/pip \
+RUN --mount=type=cache,id=cache-pip,target=/root/.cache/pip \
     pip install --prefer-binary -r requirements.txt
 
 COPY . .
